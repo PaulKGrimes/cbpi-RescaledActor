@@ -44,7 +44,7 @@ class RescaledActor(ActorBase):
                 try:
                     power = self.base.power
                 except AttributeError:
-                    power = None
+                    return None
 
         min_power = float(self.min_power)
         max_power = float(self.max_power)
