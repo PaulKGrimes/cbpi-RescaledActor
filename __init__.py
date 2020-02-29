@@ -28,14 +28,14 @@ class RescaledActor(ActorBase):
 
     def set_power(self, power):
         """Set the power as a percentage of the range between minimum and maximum power"""
-        if min_power > max_power:
+        if self.min_power > self.max_power:
             self.api.notify(headline="Invalid Settings",
                 message="Minium power is set to a value greater than the maximum power",
                 timeout=self.timeout,
                 type="danger")
             raise UserWarning("Minimum power is set to a value greater than maximum power")
 
-        if min_power == max_power:
+        if self.min_power == self.max_power:
             raise UserWarning("Maximum and minimum power are equal")
             self.api.notify(headline="Invalid Settings",
                 message="Minium power is set equal to the maximum power",
@@ -43,7 +43,7 @@ class RescaledActor(ActorBase):
                 type="danger")
             raise UserWarning("Minimum power is set equal to maximum power")
 
-        rescaled_power = min_power + (max_power - min_power)/100 * power
+        rescaled_power = self.min_power + (self.max_power - self.min_power)/100 * power
         self.api.actor_power(int(self.base), power=power)
 
     def off(self):
