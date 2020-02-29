@@ -16,9 +16,9 @@ class RescaledActor(ActorBase):
     between minimum and maximum power is small.
     """
     base = Property.Actor(label="Base Actor", description="Select the actor you would like to rescale")
-    min_power = Property.Number(label="Minimum Power (%)", True, 99, description="The minimum output power of the actor when switched on. Use with caution on heaters!")
-    max_power = Property.Number(label="Maximum Power (%)", True, 100, description="The maximum output power of the actor when switched on.")
-    timeout = Property.Number(label="Notification duration (ms)", True, 5000, description="0ms will disable notifications completely")
+    min_power = Property.Number("Minimum Power (%)", True, 99, description="The minimum output power of the actor when switched on. Use with caution on heaters!")
+    max_power = Property.Number("Maximum Power (%)", True, 100, description="The maximum output power of the actor when switched on.")
+    timeout = Property.Number("Notification duration (ms)", True, 5000, description="0ms will disable notifications completely")
 
     def init(self):
         # Where should we check that maximum is greater than minimum?
