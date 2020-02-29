@@ -39,6 +39,8 @@ class RescaledActor(ActorBase):
         # controlled to our power. If our power hasn't been set yet, set it to 100.0
         if power is None:
             try:
+                print cbpi.cache["actors"][self.base]
+                print cbpi.cache["actors"][self.base].power
                 power = self.power
             except AttributeError:
                 power = 100.
