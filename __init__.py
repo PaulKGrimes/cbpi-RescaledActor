@@ -28,6 +28,12 @@ class RescaledActor(ActorBase):
 
     def set_power(self, power):
         """Set the power as a percentage of the range between minimum and maximum power"""
+        self.api.actor_power(int(self.base), power=self.rescale_power(power))
+
+    def rescale_power(self, power):
+        """Calculate the rescaled power from the requested power"""
+        # We carry out the maths in a standalone function so that on and set_power
+        # can use it
         min_power = float(self.min_power)
         max_power = float(self.max_power)
 
@@ -47,7 +53,8 @@ class RescaledActor(ActorBase):
             raise UserWarning("Minimum power is set equal to maximum power")
 
         rescaled_power = min_power + (max_power - min_power)/100. * power
-        self.api.actor_power(int(self.base), power=rescaled_power)
+
+        return rescaled_power
 
     def off(self):
         """Switch the actor off"""
@@ -55,4 +62,4 @@ class RescaledActor(ActorBase):
 
     def on(self, power=None):
         """Switch the actor on"""
-        self.api.switch_actor_on(int(self.base), power=power)
+        self.api.switch_actor_on(int(self.base), power=self.rescale(power))
