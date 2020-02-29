@@ -62,4 +62,4 @@ class RescaledActor(ActorBase):
 
     def on(self, power=None):
         """Switch the actor on"""
-        self.api.switch_actor_on(int(self.base), power=self.rescale(power))
+        self.api.switch_actor_on(int(self.base), power=self.rescale_power(power))
