@@ -46,7 +46,7 @@ class RescaledActor(ActorBase):
                 type="danger")
             raise UserWarning("Minimum power is set equal to maximum power")
 
-        rescaled_power = min_power + (max_power - min_power)/100 * power
+        rescaled_power = min_power + (max_power - min_power)/100. * power
         self.api.actor_power(int(self.base), power=power)
 
     def off(self):
