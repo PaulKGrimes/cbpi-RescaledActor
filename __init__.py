@@ -35,9 +35,10 @@ class RescaledActor(ActorBase):
         # We carry out the maths in a standalone function so that on and set_power
         # can use it
 
-        # If power supplied is None, return None
+        # If power supplied is None, return our own power, so that base actor is
+        # controlled to our power.
         if power is None:
-            return None
+            power = self.power
 
         min_power = float(self.min_power)
         max_power = float(self.max_power)
