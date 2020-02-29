@@ -39,11 +39,12 @@ class RescaledActor(ActorBase):
         # controlled to our power. If our power hasn't been set yet, set it to 100.0
         if power is None:
             try:
-                print cbpi.cache["actors"][self.base]
-                print cbpi.cache["actors"][self.base].power
                 power = self.power
             except AttributeError:
-                power = 100.
+                try:
+                    power = self.base.power
+                except AttributeError:
+                    power = None
 
         min_power = float(self.min_power)
         max_power = float(self.max_power)
@@ -58,7 +59,7 @@ class RescaledActor(ActorBase):
         if min_power == max_power:
             raise UserWarning("Maximum and minimum power are equal")
             self.api.notify(headline="Invalid Settings",
-                message="Minium power is set equal to the maximum power",
+                message="Minimum power is set equal to the maximum power",
                 timeout=self.timeout,
                 type="danger")
             raise UserWarning("Minimum power is set equal to maximum power")
