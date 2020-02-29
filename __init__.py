@@ -47,7 +47,7 @@ class RescaledActor(ActorBase):
             raise UserWarning("Minimum power is set equal to maximum power")
 
         rescaled_power = min_power + (max_power - min_power)/100. * power
-        self.api.actor_power(int(self.base), power=power)
+        self.api.actor_power(int(self.base), power=rescaled_power)
 
     def off(self):
         """Switch the actor off"""
