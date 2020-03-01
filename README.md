@@ -2,15 +2,16 @@
 A plugin for CraftBeerPi that wraps a power controlled actor in another actor that rescales the power range of the base actor
 
 This plugin adds a ``RescaledActor`` that wraps another actor, and rescales the requested power
-linearly according to the min and max power properties.
+linearly according to the Minimum and Maximum Power properties.
 
 This allows you to set a maximum power output for an over-powered heater
 or to set a minimum power output for something like a pump that stalls below
-a certain power setting.
+a certain power setting.  Although the various PWM logic controllers allow you to
+set a maximum power output, this may be useful with other controllers.
 
 If you really want to, you can cascade multiple ``RescaledActors``, and you setting
 minimum and maximum values outside the 0-100% power range will work as long as
-the values that are passed to a real actor are
+the values that are passed to a real actor are in the 0-100% range.
 
 Internal checking that the minimum power is less than the maximum power is done
 when the power is set. Errors in settings may not show up until the Actor is
