@@ -37,6 +37,11 @@ class RescaledActor(ActorBase):
 
         # If power supplied is None, return our own power, so that base actor is
         # controlled to our power. If our power hasn't been set yet, set it to 100.0
+        if power is None:
+            try:
+                power = self.power
+            except AttributeError:
+                power = float(self.max_power)
 
         min_power = float(self.min_power)
         max_power = float(self.max_power)
@@ -66,10 +71,4 @@ class RescaledActor(ActorBase):
 
     def on(self, power=None):
         """Switch the actor on"""
-        if power is None:
-            try:
-                power = self.power
-            except AttributeError:
-                power = float(self.max_power)
-
         self.api.switch_actor_on(int(self.base), power=self.rescale_power(power))
