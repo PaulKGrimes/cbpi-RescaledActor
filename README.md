@@ -9,7 +9,7 @@ or to set a minimum power output for something like a pump that stalls below
 a certain power setting.  Although the various PWM logic controllers allow you to
 set a maximum power output, this may be useful with other controllers.
 
-If you really want to, you can cascade multiple ``RescaledActors``, and you setting
+If you really want to, you can cascade multiple ``RescaledActor``s, and you setting
 minimum and maximum values outside the 0-100% power range will work as long as
 the values that are passed to a real actor are in the 0-100% range.
 
