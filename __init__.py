@@ -16,7 +16,7 @@ class RescaledActor(ActorBase):
     between minimum and maximum power is small.
     """
     base = Property.Actor(label="Base Actor", description="Select the actor you would like to rescale")
-    min_power = Property.Number("Minimum Power (%)", True, 99, description="The minimum output power of the actor when switched on. Use with caution on heaters!")
+    min_power = Property.Number("Minimum Power (%)", True, 0, description="The minimum output power of the actor when switched on. Use with caution on heaters!")
     max_power = Property.Number("Maximum Power (%)", True, 100, description="The maximum output power of the actor when switched on.")
     timeout = Property.Number("Notification duration (ms)", True, 5000, description="0ms will disable notifications completely")
 
@@ -37,14 +37,6 @@ class RescaledActor(ActorBase):
 
         # If power supplied is None, return our own power, so that base actor is
         # controlled to our power. If our power hasn't been set yet, set it to 100.0
-        if power is None:
-            try:
-                power = self.power
-            except AttributeError:
-                try:
-                    power = self.base.power
-                except AttributeError:
-                    return None
 
         min_power = float(self.min_power)
         max_power = float(self.max_power)
@@ -74,4 +66,10 @@ class RescaledActor(ActorBase):
 
     def on(self, power=None):
         """Switch the actor on"""
+        if power is None:
+            try:
+                power = self.power
+            except AttributeError:
+                power = float(self.max_power)
+
         self.api.switch_actor_on(int(self.base), power=self.rescale_power(power))
