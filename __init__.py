@@ -28,7 +28,7 @@ class RescaledActor(ActorBase):
 
     def set_power(self, power):
         """Set the power as a percentage of the range between minimum and maximum power"""
-    self.power = power
+        self.power = power
         self.api.actor_power(int(self.base), power=self.rescale_power(power))
 
     def rescale_power(self, power):
